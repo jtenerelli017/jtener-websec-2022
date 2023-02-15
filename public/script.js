@@ -20,15 +20,56 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 let db = rtdb.getDatabase(app);
-let titleRef = rtdb.ref(db, "/title");
 
-//READ
-rtdb.onValue(titleRef, ss=>{
-  $("#title").html(ss.val());
+// Make a twoot
+let twoot1 = {
+  "author": {
+    "handle": "JtenerWebSec",
+    "picture": "https://i.redd.it/zaq25fj3d2551.jpg"
+  },
+  "timestamp": "2/15/2023, 3:13:27 PM",
+  "text": "If you can't do it good, do it hard.",
+  "images": [
+    "https://upload.wikimedia.org/wikipedia/commons/7/71/St._Bernard_puppy.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Image-Cavapoo_puppy.JPG/1280px-Image-Cavapoo_puppy.JPG"
+  ],
+  "likes": {
+    "count": 2,
+    "users": [
+      "puppyLover1", "puppyLover2"
+    ]
+  },
+  "retwoots": {
+    "count": 1,
+    "users": [
+      "alexander488"
+    ]
+  }
+}
+
+let renderTwoot = (twt) => {
+  $("#everytwoot").append(`
+    <div class="twoot">
+      <h1>${twt.text}</h1>
+    </div>
+  `);
+}
+
+renderTwoot(twoot1);
+$(".twoot").on("click", (evt) => {
+  $(evt.currentTarget).addClass("clicked");
 });
 
-//UPDATE
-$("#newtitle").on("keyup", evt=>{
-  let newtitle = $("#newtitle").val();
-  rtdb.set(titleRef, newtitle);
-})
+// //READ
+// rtdb.onValue(titleRef, ss=>{
+//   $("#title").html(ss.val());
+// });
+
+// //UPDATE
+// $("#newtitle").on("keyup", evt=>{
+//   let newtitle = $("#newtitle").val();
+//   rtdb.set(titleRef, newtitle);
+// })
+
+// new Date().getTime()
+// new Date(2349812903482).toLocaleString()
