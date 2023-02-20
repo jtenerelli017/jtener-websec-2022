@@ -21,55 +21,72 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 let db = rtdb.getDatabase(app);
 
-// Make a twoot
-let twoot1 = {
-  "author": {
-    "handle": "JtenerWebSec",
-    "picture": "https://i.redd.it/zaq25fj3d2551.jpg"
-  },
-  "timestamp": "2/15/2023, 3:13:27 PM",
-  "text": "If you can't do it good, do it hard.",
-  "images": [
-    "https://upload.wikimedia.org/wikipedia/commons/7/71/St._Bernard_puppy.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Image-Cavapoo_puppy.JPG/1280px-Image-Cavapoo_puppy.JPG"
-  ],
-  "likes": {
-    "count": 2,
-    "users": [
-      "puppyLover1", "puppyLover2"
-    ]
-  },
-  "retwoots": {
-    "count": 1,
-    "users": [
-      "alexander488"
-    ]
-  }
-}
+// Function to render a twoot
+/* Sources:
+https://drapak.ca/cpg/htmlConvertUnicode.shtml#:~:text=You%20do%20this%20by%20adding,will%20display%20J%20in%20HTML.
+https://getbootstrap.com/docs/5.3/components/card/
+https://symbl.cc/en/2764/
+https://symbl.cc/en/1F502/
+https://stackoverflow.com/questions/30192263/bootstrap-javascript-not-working
+https://www.w3schools.com/tags/tag_script.asp
+*/
+let renderTwoot = (tObj, userPic) => {
 
-let renderTwoot = (twt) => {
+  const heart = `&#${10084}`;
+  const arrow = `&#${128258}`;
+
   $("#everytwoot").append(`
-    <div class="twoot">
-      <h1>${twt.text}</h1>
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0" id="pic">
+        <div class="col-md-4">
+          <img src="${userPic}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">${tObj.handle}</h5>
+            <p class="card-text">${tObj.text}</p>
+            <p class="card-text">${heart} ${tObj.likes}  ${arrow} ${tObj.retwoots} -- <small class="text-muted">${tObj.timestamp}</small></p>
+          </div>
+        </div>
+      </div>
     </div>
   `);
 }
 
-renderTwoot(twoot1);
-$(".twoot").on("click", (evt) => {
-  $(evt.currentTarget).addClass("clicked");
+// Add a new twoot to the database
+// Source: https://firebase.google.com/docs/database/web/read-and-write#updating_or_deleting_data
+let createTwoot = (handle, text) => {
+
+  const twootContent = {
+    handle: handle,
+    text: text,
+    likes: 0,
+    retwoots: 0,
+    timestamp: new Date().toLocaleString()
+  };
+
+  const twootsRef = rtdb.ref(db, "/twoots");
+  return rtdb.push(twootsRef, twootContent);
+};
+
+// Create twoots
+// createTwoot("JtenerWebSec", "If you can't do it good, do it hard.");
+// createTwoot("bobby231", "I love grilling");
+// createTwoot("poopyHead63", "No profile picture for me!");
+
+// Render twoots
+let twootsRef = rtdb.ref(db, "/twoots");
+rtdb.onChildAdded(twootsRef, ss => {
+  const pic = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
+  renderTwoot(ss.val(), pic);
+  // rtdb.get(db, `/users/${ss.val().handle}`)
+  // .then(ss2 => {
+  //   if(ss2.exists) {
+  //     pic = ss2;
+  //   }
+  //   renderTwoot(ss, pic);
+  // })
+  // .catch(error => {
+  //   console.error(`ERROR! ${error}`);
+  // });
 });
-
-// //READ
-// rtdb.onValue(titleRef, ss=>{
-//   $("#title").html(ss.val());
-// });
-
-// //UPDATE
-// $("#newtitle").on("keyup", evt=>{
-//   let newtitle = $("#newtitle").val();
-//   rtdb.set(titleRef, newtitle);
-// })
-
-// new Date().getTime()
-// new Date(2349812903482).toLocaleString()
