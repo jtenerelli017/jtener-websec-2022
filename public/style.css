@@ -1,18 +1,3 @@
 body {
-    background-color: rgb(225, 106, 255);
-}
-
-/* Sources:
-https://developer.mozilla.org/en-US/docs/Learn/CSS/Howto/CSS_FAQ
-https://www.w3schools.com/css/css_align.asp
-*/
-.enter-twoot {
-    position: fixed;
-    right: 0px;
-    top: 0px;
-    width: 600px;
-}
-
-.publish-twoot {
-    background-color: white;
+    background-color: plum;
 }
