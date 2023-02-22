@@ -29,6 +29,7 @@ https://symbl.cc/en/2764/
 https://symbl.cc/en/1F502/
 https://stackoverflow.com/questions/30192263/bootstrap-javascript-not-working
 https://www.w3schools.com/tags/tag_script.asp
+https://makeschool.org/mediabook/oa/tracks/web-dev-with-node/your-first-website--landing-page/grouping-elements/
 */
 let renderTwoot = (tObj, userPic) => {
 
@@ -68,6 +69,23 @@ let createTwoot = (handle, text) => {
   const twootsRef = rtdb.ref(db, "/twoots");
   return rtdb.push(twootsRef, twootContent);
 };
+
+/* Sources:
+https://www.w3schools.com/html/tryit.asp?filename=tryhtml_id_js
+https://www.w3schools.com/jsref/met_document_getelementbyid.asp
+https://www.w3schools.com/jsref/prop_html_innerhtml.asp
+https://linuxhint.com/get-element-value-using-javascript/#:~:text=To%20get%20the%20value%20of%20the%20DOM's%20element%2C%20use%20the,the%20%E2%80%9CquerySelector()%E2%80%9D%20method.
+https://blog.hubspot.com/website/call-javascript-function-html#:~:text=Use%20Script%20Tags,interacts%20with%20a%20page%20element.
+*/
+let publishTwoot = () => {
+
+  const input = document.getElementById("input-twoot");
+  const inputVal = input.value;
+  if(inputVal == null) {
+    createTwoot("JtenerWebSec", inputVal);
+    input.innerHTML = "";
+  }
+}
 
 // Create twoots
 // createTwoot("JtenerWebSec", "If you can't do it good, do it hard.");
