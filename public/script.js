@@ -76,16 +76,20 @@ https://www.w3schools.com/jsref/met_document_getelementbyid.asp
 https://www.w3schools.com/jsref/prop_html_innerhtml.asp
 https://linuxhint.com/get-element-value-using-javascript/#:~:text=To%20get%20the%20value%20of%20the%20DOM's%20element%2C%20use%20the,the%20%E2%80%9CquerySelector()%E2%80%9D%20method.
 https://blog.hubspot.com/website/call-javascript-function-html#:~:text=Use%20Script%20Tags,interacts%20with%20a%20page%20element.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+https://careerkarma.com/blog/javascript-replace/#:~:text=To%20replace%20text%20in%20a,replace%20text%20in%20a%20string.
+https://stackoverflow.com/questions/10826756/javascript-innerhtml-not-updating-element
 */
-let publishTwoot = () => {
+$("#publish-twoot").on("click", evt => {
 
+  console.log("CLICK!");
   const input = document.getElementById("input-twoot");
   const inputVal = input.value;
-  if(inputVal == null) {
+  if(inputVal != "") {
     createTwoot("JtenerWebSec", inputVal);
-    input.innerHTML = "";
+    input.value = "";
   }
-}
+})
 
 // Create twoots
 // createTwoot("JtenerWebSec", "If you can't do it good, do it hard.");
