@@ -1,3 +1,20 @@
 body {
-    background-color: plum;
+    background-color: rgb(225, 106, 255);
+}
+
+/*
+Styling for twoot input prompt and publish button
+Sources:
+    CSS troubleshooting     https://developer.mozilla.org/en-US/docs/Learn/CSS/Howto/CSS_FAQ
+    Aligning to top right   https://www.w3schools.com/css/css_align.asp
+*/
+#twoot-prompt {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: 600px;
+}
+
+#publish-twoot {
+    background-color: white;
 }

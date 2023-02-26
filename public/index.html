@@ -1,23 +1,34 @@
-<!-- Sources:
-https://blog.hubspot.com/website/comment-out-in-html#:~:text=How%20to%20Write%20a%20Comment
--->
-
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <title>Twutter</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./style.css">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-app-compat.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-database-compat.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-auth-compat.js'></script>
+  <script type="module" src="./script.js"></script>
 
 </head>
 <body>
 
-<div id="everytwoot"></div>
+  <div id="everytwoot"></div>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
-  <script type="module" src="./script.js"></script>
+  <!--
+  Input for creating a twoot
+  Sources:
+    Input group component       https://getbootstrap.com/docs/5.3/forms/input-group/
+    HTML IDs and how they work  https://www.w3schools.com/html/html_id.asp
+    HTML onClick listeners      https://www.w3schools.com/jsref/event_onclick.asp
+  -->
+  <div class="input-group mb-3" id="twoot-prompt">
+    <input type="text" class="form-control" placeholder="Enter a twoot here" aria-label="Recipient's username" aria-describedby="publish-twoot" id="input-twoot">
+    <button class="btn btn-outline-secondary" type="button" id="publish-twoot">Publish</button>
+  </div>
 
 </body>
 </html>
